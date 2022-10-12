@@ -1,9 +1,9 @@
-import './App.css';
+import TaskList from './components/Tasks/TaskList';
 
 function App() {
   return (
     <div className="App">
-      <div>Página Inicial</div>
+      <TaskList/>
     </div>
   );
 }
