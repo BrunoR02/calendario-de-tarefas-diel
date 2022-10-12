@@ -1,10 +1,8 @@
-import TaskList from './components/Tasks/TaskList';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
-    <div className="App">
-      <TaskList/>
-    </div>
+    <HomePage/>
   );
 }
 
