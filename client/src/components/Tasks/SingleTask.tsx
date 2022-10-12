@@ -1,7 +1,9 @@
+import { useState } from "react"
+import TaskDetails from "./TaskDetails"
 import styles from "./SingleTask.module.css"
-import TaskActions from "./TaskActions"
 
 export default function SingleTask(){
+  const [showDetails,setShowDetails] = useState(false)
 
   const DUMMY_TASK = {
     title: "Realizar tarefas relacionado a tal assunto",
@@ -11,14 +13,14 @@ export default function SingleTask(){
   }
   return (
     <>
-      <div className={styles.task}>
+      {showDetails && <TaskDetails taskData={DUMMY_TASK} closeModal={()=>setShowDetails(false)}/>}
+      <div onClick={()=>setShowDetails(true)} className={styles.task}>
         <h3 className={styles.title}>{DUMMY_TASK.title}</h3>
         <section className={styles.footer}>
           <div className={styles.details}>
             <span className={styles.date}>{DUMMY_TASK.date}</span>
             <span className={styles.duration}>{DUMMY_TASK.time}</span>
           </div>
-          <TaskActions/>
         </section>
       </div>
     </>

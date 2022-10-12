@@ -1,0 +1,49 @@
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  background-color: #ddd;
+  border-bottom: 1px solid #222;
+}
+
+.title{
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+.date{
+  color: #777;
+}
+
+.duration{
+  display: flex;
+  align-items: center;
+  color: #222;
+}
+
+.duration::before{
+  content: "";
+  display: table;
+  width: 15px;
+  height: 15px;
+  margin-right: 5px;
+  background-image: url("../../assets/icons/clock.png");
+  background-size: cover;
+  filter: invert(20%);
+}
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.subTitle{
+  font-size: 1.1em;
+}
+
+.description{
+  padding: 20px 10px;
+}

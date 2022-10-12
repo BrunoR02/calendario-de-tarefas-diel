@@ -4,6 +4,7 @@
   padding: 10px 20px;
   background-color: #eee;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .task:hover{
@@ -11,7 +12,7 @@
 }
 
 .title{
-  cursor: pointer;
+  font-weight: 600;
 }
 
 .footer{
