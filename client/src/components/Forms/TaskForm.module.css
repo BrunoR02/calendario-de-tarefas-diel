@@ -1,25 +1,32 @@
-.container{
+.form{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-width: 1200px;
-  margin: 20px auto 0 auto;
+  width: 100%;
+}
+
+.actions{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
 }
 
 .button{
   position: relative;
-  display: flex;
-  align-items: center;
-  padding: 20px;
-  font-size: 1.1em;
-  font-weight: 600;
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  font-weight: 600; 
   color: #eee;
   background-color: #222;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
+  transition: color, background-color 0.3s ease;
   z-index: 1;
 }
 
@@ -31,7 +38,7 @@
   display: block;
   width: 0;
   height: 100%;
-  background-color: #555;
+  background-color: #333;
   border-radius: 10px;
   transition: 0.3s ease;
   z-index: -1;
@@ -41,13 +48,8 @@
   width: 100%;
 }
 
-.icon{
-  margin-right: 5px;
-  filter: invert(90%);
-}
-
-.title{
-  margin: 20px auto;
-  font-size: 1.2em;
-  text-align: center;
+.errorMessage{
+  margin-top: 10px;
+  color: red;
+  font-size: 0.9em;
 }

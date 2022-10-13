@@ -4,6 +4,7 @@
 }
 
 .button{
+  position: relative;
   margin: 0 10px;
   padding: 10px;
   background-color: transparent;
@@ -11,9 +12,23 @@
   border: none;
   box-shadow: 0 0 5px #222;
   cursor: pointer;
-  transition: background-color 0.1s ease;
+  overflow: hidden;
 }
 
-.button:active{
+.button::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 100%;
   background-color: #ddd;
+  border-radius: 50%;
+  transition: 0.2s ease;
+  z-index: -1;
+}
+
+.button:hover::before{
+  width: 100%;
 }
