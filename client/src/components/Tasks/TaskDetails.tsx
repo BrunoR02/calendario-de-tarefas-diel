@@ -3,18 +3,14 @@ import Modal from "../Modals/Modal"
 import styles from "./TaskDetails.module.css"
 import TaskActions from "./TaskActions"
 import Backdrop from "../Modals/Backdrop"
+import { TaskType } from "../../helpers/typeDefs"
 
 type PropsType = {
-  taskData: {
-    title: string
-    date: string
-    time: string
-    description: string
-  }
+  task: TaskType
   closeModal: ()=>void
 }
 
-export default function TaskDetails({taskData,closeModal}:PropsType){
+export default function TaskDetails({task,closeModal}:PropsType){
 
   return (
     <>
@@ -22,13 +18,13 @@ export default function TaskDetails({taskData,closeModal}:PropsType){
         <Backdrop closeModal={closeModal}/>
         <Modal closeModal={closeModal}>
           <section className={styles.header}>
-            <h3 className={styles.title}>{taskData.title}</h3>
-            <span className={styles.date}>{taskData.date}</span>
-            <span className={styles.duration}>{taskData.time}</span>
+            <h3 className={styles.title}>{task.title}</h3>
+            <span className={styles.date}>{task.date}</span>
+            <span className={styles.duration}>{task.startTime + " - " + task.endTime}</span>
           </section>
           <section className={styles.footer}>
             <h4 className={styles.subTitle}>Descrição</h4>
-            <p className={styles.description}>{taskData.description}</p>
+            <p className={styles.description}>{task.description}</p>
             <TaskActions/>
           </section>
         </Modal>

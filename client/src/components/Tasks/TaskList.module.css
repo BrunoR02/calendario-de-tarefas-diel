@@ -6,3 +6,9 @@
   max-width: 1200px;
   margin: 0 auto;
 }
+
+.notFound{
+  margin: 20px;
+  font-size: 1.2em;
+  font-weight: 600;
+}

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useReducer, useState} from "react"
+import { ChangeEvent, FormEvent, useReducer} from "react"
 import SingleInput from "./Inputs/SingleInput"
 import styles from "./TaskForm.module.css"
 
@@ -51,14 +51,36 @@ export default function TaskForm({closeModal}:PropsType){
   let isTimeInvalid = false
 
   let [startTime,endTime] = [input.startTime.split(":").map(item=>parseInt(item)),input.endTime.split(":").map(item=>parseInt(item))]
-  if((endTime[0] - startTime[0]) < 0 || endTime[0] === startTime[0] && (endTime[1] - startTime[1]) <= 0){
+  if((endTime[0] - startTime[0]) < 0 || (endTime[0] === startTime[0] && (endTime[1] - startTime[1]) <= 0)){
     isTimeInvalid = true
   }
 
-  function submitHandler(e:FormEvent){
+  async function submitHandler(e:FormEvent){
     e.preventDefault()
     if(!isTimeInvalid){
-      console.log(input)
+      const id = crypto.randomUUID().slice(0,8)
+
+      const dateArray = input.date.split("-")
+      const [year,month,day] = [dateArray[0],dateArray[1],dateArray[2]]
+      const formatedDate = day + "/" + month + "/" + year
+
+      const body = {id,...input, date: formatedDate}
+
+      console.log(body)
+      const response = await fetch("/api/task",{
+        method: "POST",
+        body: JSON.stringify(body),
+        headers:{
+          "Content-Type": "application/json"
+        },
+      })
+
+      console.log(response)
+
+      if(response.status === 201){
+        window.location.reload()
+      }
+
     }
   }
 
