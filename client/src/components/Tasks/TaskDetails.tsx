@@ -16,7 +16,7 @@ export default function TaskDetails({task,closeModal}:PropsType){
     <>
     {ReactDOM.createPortal(<>
         <Backdrop closeModal={closeModal}/>
-        <Modal closeModal={closeModal}>
+        <Modal extraStyle={{width:"40%"}} closeModal={closeModal}>
           <section className={styles.header}>
             <h3 className={styles.title}>{task.title}</h3>
             <span className={styles.date}>{task.date}</span>

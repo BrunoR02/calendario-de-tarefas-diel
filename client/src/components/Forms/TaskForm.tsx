@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useReducer} from "react"
+import { ChangeEvent, FormEvent, useReducer, useState} from "react"
 import SingleInput from "./Inputs/SingleInput"
 import styles from "./TaskForm.module.css"
 
@@ -47,13 +47,10 @@ function reducer(state:InputStateType,action: InputAction){
 
 export default function TaskForm({closeModal}:PropsType){
   const [input,dispatch] = useReducer(reducer,initialInputState)
-
-  let isTimeInvalid = false
+  const [isDurationDefined,setIsDurationDefined] = useState(false)
 
   let [startTime,endTime] = [input.startTime.split(":").map(item=>parseInt(item)),input.endTime.split(":").map(item=>parseInt(item))]
-  if((endTime[0] - startTime[0]) < 0 || (endTime[0] === startTime[0] && (endTime[1] - startTime[1]) <= 0)){
-    isTimeInvalid = true
-  }
+  let isTimeInvalid = (endTime[0] - startTime[0]) < 0 || (endTime[0] === startTime[0] && (endTime[1] - startTime[1]) <= 0)
 
   async function submitHandler(e:FormEvent){
     e.preventDefault()
@@ -66,7 +63,6 @@ export default function TaskForm({closeModal}:PropsType){
 
       const body = {id,...input, date: formatedDate}
 
-      console.log(body)
       const response = await fetch("/api/task",{
         method: "POST",
         body: JSON.stringify(body),
@@ -74,8 +70,6 @@ export default function TaskForm({closeModal}:PropsType){
           "Content-Type": "application/json"
         },
       })
-
-      console.log(response)
 
       if(response.status === 201){
         window.location.reload()
@@ -90,10 +84,10 @@ export default function TaskForm({closeModal}:PropsType){
       <SingleInput title="Descrição" type="textarea" value={input.description} extraStyle={{width:"80%"}} onChange={(e:ChangeEvent<HTMLTextAreaElement>)=>{dispatch({type:"description",payload:e.target.value})}}/>
       <SingleInput title="Data" type="date" value={input.date} extraStyle={{width:"30%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"date",payload:e.target.value})}}/>
       <div style={{display:"flex",justifyContent:"center",flexWrap: "wrap",width:"100%"}}>
-        <SingleInput title="De" type="time" value={input.startTime} error={isTimeInvalid} extraStyle={{width:"25%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"startTime",payload:e.target.value})}}/>
-        <SingleInput title="Até" type="time" value={input.endTime} error={isTimeInvalid} extraStyle={{width:"25%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"endTime",payload:e.target.value})}}/>
+        <SingleInput title="De" type="time" value={input.startTime} error={isTimeInvalid && isDurationDefined} extraStyle={{width:"25%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"startTime",payload:e.target.value})}}/>
+        <SingleInput title="Até" type="time" value={input.endTime} error={isTimeInvalid && isDurationDefined} extraStyle={{width:"25%"}} onBlur={()=>{setIsDurationDefined(true)}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"endTime",payload:e.target.value})}}/>
       </div>
-      {isTimeInvalid && <span className={styles.errorMessage}>Duração Inválida.</span>}
+      {isTimeInvalid && isDurationDefined && <span className={styles.errorMessage}>Duração Inválida.</span>}
       <div className={styles.actions}>
         <button className={styles.button} type="button" onClick={closeModal}>Cancelar</button>
         <button className={styles.button} type="submit">Salvar</button>
