@@ -16,7 +16,7 @@ type TaskType = {
   date: string
 }
 
-const TASK_LIST:TaskType[] = [
+let TASK_LIST:TaskType[] = [
   {
     id: "123",
     title: "Desenvolver tal coisa",
@@ -71,6 +71,25 @@ app.post("/api/task",(req,res)=>{
     TASK_LIST.push(task)
     res.sendStatus(201)
   }
+})
+
+app.put("/api/task",(req,res)=>{
+  const task:TaskType = req.body
+  if(!task){
+    res.sendStatus(400)
+  } else {
+    const list = TASK_LIST.map(item=>{
+      if(item.id === task.id){
+        return task
+      }
+      return item
+    })
+
+    TASK_LIST = list
+
+    res.sendStatus(201)
+  }
+
 })
 
 app.get("/api/task",(req,res)=>{

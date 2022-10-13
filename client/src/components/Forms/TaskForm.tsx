@@ -1,4 +1,6 @@
 import { ChangeEvent, FormEvent, useReducer, useState} from "react"
+import convertDate from "../../helpers/convertDate"
+import { TaskType } from "../../helpers/typeDefs"
 import SingleInput from "./Inputs/SingleInput"
 import styles from "./TaskForm.module.css"
 
@@ -17,14 +19,7 @@ type InputStateType = {
 
 type PropsType = {
   closeModal: () => void
-}
-
-const initialInputState: InputStateType = {
-  title: "",
-  description: "",
-  date: new Date().toISOString().toLocaleString().slice(0,10),
-  startTime: "00:00",
-  endTime: "00:00"
+  defaultData?: TaskType
 }
 
 function reducer(state:InputStateType,action: InputAction){
@@ -45,8 +40,15 @@ function reducer(state:InputStateType,action: InputAction){
   }
 }
 
-export default function TaskForm({closeModal}:PropsType){
-  const [input,dispatch] = useReducer(reducer,initialInputState)
+export default function TaskForm({closeModal,defaultData}:PropsType){
+  const [input,dispatch] = useReducer(reducer,{
+    title: defaultData ? defaultData.title : "",
+    description: defaultData ? defaultData.description : "",
+    date: defaultData ? convertDate(defaultData.date,"locale") : new Date().toISOString().toLocaleString().slice(0,10),
+    startTime: defaultData ? defaultData.startTime : "00:00",
+    endTime: defaultData ? defaultData.endTime : "00:00"
+  })
+
   const [isDurationDefined,setIsDurationDefined] = useState(false)
 
   let [startTime,endTime] = [input.startTime.split(":").map(item=>parseInt(item)),input.endTime.split(":").map(item=>parseInt(item))]
@@ -55,24 +57,36 @@ export default function TaskForm({closeModal}:PropsType){
   async function submitHandler(e:FormEvent){
     e.preventDefault()
     if(!isTimeInvalid){
-      const id = crypto.randomUUID().slice(0,8)
+      if(defaultData){
+        const body = {id:defaultData.id,...input,date:convertDate(input.date,"readable")}
 
-      const dateArray = input.date.split("-")
-      const [year,month,day] = [dateArray[0],dateArray[1],dateArray[2]]
-      const formatedDate = day + "/" + month + "/" + year
-
-      const body = {id,...input, date: formatedDate}
-
-      const response = await fetch("/api/task",{
-        method: "POST",
-        body: JSON.stringify(body),
-        headers:{
-          "Content-Type": "application/json"
-        },
-      })
-
-      if(response.status === 201){
-        window.location.reload()
+        const response = await fetch("/api/task",{
+          method: "PUT",
+          body: JSON.stringify(body),
+          headers:{
+            "Content-Type": "application/json"
+          },
+        })
+  
+        if(response.status === 201){
+          window.location.reload()
+        }
+      } else{
+        const id = crypto.randomUUID().slice(0,8)
+  
+        const body = {id,...input, date: convertDate(input.date,"readable")}
+  
+        const response = await fetch("/api/task",{
+          method: "POST",
+          body: JSON.stringify(body),
+          headers:{
+            "Content-Type": "application/json"
+          },
+        })
+  
+        if(response.status === 201){
+          window.location.reload()
+        }
       }
 
     }

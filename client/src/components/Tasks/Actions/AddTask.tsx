@@ -2,10 +2,10 @@ import { useState } from "react"
 import ReactDOM from "react-dom"
 import styles from "./AddTask.module.css"
 
-import addIcon from "../../assets/icons/add.png"
-import Backdrop from "../Modals/Backdrop"
-import Modal from "../Modals/Modal"
-import TaskForm from "../Forms/TaskForm"
+import addIcon from "../../../assets/icons/add.png"
+import Backdrop from "../../Modals/Backdrop"
+import Modal from "../../Modals/Modal"
+import TaskForm from "../../Forms/TaskForm"
 
 export default function AddTask(){
   const [showModal,setShowModal] = useState(false)

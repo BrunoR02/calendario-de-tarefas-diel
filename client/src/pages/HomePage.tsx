@@ -1,4 +1,4 @@
-import AddTask from "../components/Tasks/AddTask"
+import AddTask from "../components/Tasks/Actions/AddTask"
 import TaskList from "../components/Tasks/TaskList"
 
 export default function HomePage(){

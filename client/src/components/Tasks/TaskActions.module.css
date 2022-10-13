@@ -32,3 +32,9 @@
 .button:hover::before{
   width: 100%;
 }
+
+.title{
+  margin: 20px auto;
+  font-size: 1.2em;
+  text-align: center;
+}

@@ -25,7 +25,7 @@ export default function TaskDetails({task,closeModal}:PropsType){
           <section className={styles.footer}>
             <h4 className={styles.subTitle}>Descrição</h4>
             <p className={styles.description}>{task.description}</p>
-            <TaskActions/>
+            <TaskActions task={task}/>
           </section>
         </Modal>
       </>,document.getElementById("modal-root") as HTMLElement)}

@@ -1,13 +1,18 @@
 import styles from "./TaskActions.module.css"
 
 import deleteIcon from "../../assets/icons/delete.png"
-import editIcon from "../../assets/icons/edit.png"
+import EditTask from "./Actions/EditTask"
+import { TaskType } from "../../helpers/typeDefs"
 
-export default function TaskActions(){
+type PropsType = {
+  task: TaskType
+}
+
+export default function TaskActions({task}:PropsType){
 
   return (
     <div className={styles.actions}>
-    <button className={styles.button}><img src={editIcon} alt="Edit" width="25px"/></button>
+      <EditTask task={task}/>
       <button className={styles.button}><img src={deleteIcon} alt="Delete" width="25px"/></button>
     </div>
   )

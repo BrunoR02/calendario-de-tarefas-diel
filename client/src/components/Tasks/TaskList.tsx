@@ -13,7 +13,6 @@ export default function TaskList(){
       setIsLoading(true)
       const response = await fetch("/api/task")
       const data = await response.json()
-      console.log(data)
       setTasks(data)
       setIsLoading(false)
     }
