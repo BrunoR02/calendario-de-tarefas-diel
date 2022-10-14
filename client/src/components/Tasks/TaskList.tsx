@@ -11,7 +11,7 @@ export default function TaskList(){
   useEffect(()=>{
     async function fetchData(){
       setIsLoading(true)
-      const response = await fetch("/api/task")
+      const response = await fetch("/api/tasks")
       const data = await response.json()
       setTasks(data)
       setIsLoading(false)

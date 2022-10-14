@@ -89,10 +89,22 @@ app.put("/api/task",(req,res)=>{
 
     res.sendStatus(201)
   }
-
 })
 
-app.get("/api/task",(req,res)=>{
+app.delete("/api/task",(req,res)=>{
+  const task = req.body
+  if(!task){
+    res.sendStatus(400)
+  } else {
+    const list = TASK_LIST.filter(item=>item.id!==task.id)
+  
+    TASK_LIST = list
+
+    res.sendStatus(200)
+  }
+})
+
+app.get("/api/tasks",(req,res)=>{
   const orderedTasks = TASK_LIST.sort((a,b)=>{
     if(a.date > b.date || (a.date === b.date && a.startTime > b.startTime)){ return 1 }
     else{ return -1}
