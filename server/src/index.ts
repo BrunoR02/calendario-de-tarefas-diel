@@ -1,5 +1,6 @@
 import express from "express"
 import cors from "cors"
+import capitalizeFirstLetters from "./helpers/capitalizeFirstLetters"
 const app = express()
 
 app.use(cors())
@@ -105,8 +106,8 @@ app.delete("/api/task",(req,res)=>{
 })
 
 app.post("/api/tasks",(req,res)=>{
-  const {targetDate} = req.body
-  if(!targetDate){
+  const {targetDate,targetSearch} = req.body
+  if(!targetDate && !targetSearch){
     res.sendStatus(400)
   } else {
     const orderedTasks = TASK_LIST.sort((a,b)=>{
@@ -114,7 +115,14 @@ app.post("/api/tasks",(req,res)=>{
       else{ return -1}
     })
 
-    const responseTasks = orderedTasks.filter(task=>{
+    let searchedTasks = orderedTasks
+    if(targetSearch !== ""){
+      searchedTasks = orderedTasks.filter(task=>{
+        return task.title.includes(capitalizeFirstLetters(targetSearch))  || task.title.toLowerCase().includes(targetSearch) || capitalizeFirstLetters(task.title).includes(capitalizeFirstLetters(targetSearch))
+      })
+    }
+
+    const responseTasks = searchedTasks.filter(task=>{
       if(Array.isArray(targetDate)){
         return task.date >= targetDate[0] && task.date <= targetDate[1]
       } else {

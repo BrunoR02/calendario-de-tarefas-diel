@@ -1,0 +1,28 @@
+.form{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.input{
+  width: 50%;
+  padding: 10px;
+  font-size: 1em;
+  color: #222;
+  background-color: #999;
+  border: 1px solid #222;
+  outline: none;
+}
+
+.button{
+  position: absolute;
+  top: 50%;
+  right: 26%;
+  transform: translateY(-45%);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}

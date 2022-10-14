@@ -5,10 +5,10 @@ import 'react-calendar/dist/Calendar.css'
 import styles from "./TaskCalendar.module.css"
 
 type PropsType = {
-  updateTargetDate: (date:Date | [Date,Date])=>void
+  setTargetDate: (date:Date | [Date,Date])=>void
 }
 
-export default function TaskCalendar({updateTargetDate}:PropsType){
+export default function TaskCalendar({setTargetDate}:PropsType){
   const [date,setDate] = useState<Date | [Date, Date]>(new Date())
   const [oldDate,setOldDate] = useState(new Date())
   const [selectValue,setSelectValue] = useState<string>("")
@@ -56,8 +56,8 @@ export default function TaskCalendar({updateTargetDate}:PropsType){
       setSelectValue("day")
       setOldDate(date as Date)
     }
-    updateTargetDate(date)
-  },[date,updateTargetDate])
+    setTargetDate(date)
+  },[date,setTargetDate])
 
   return(
     <>
