@@ -1,8 +1,8 @@
 import styles from "./TaskActions.module.css"
 
-import EditTask from "./Actions/EditTask"
-import { TaskType } from "../../helpers/typeDefs"
-import DeleteTask from "./Actions/DeleteTask"
+import EditTask from "./EditTask"
+import { TaskType } from "../../../helpers/typeDefs"
+import DeleteTask from "./DeleteTask"
 
 type PropsType = {
   task: TaskType

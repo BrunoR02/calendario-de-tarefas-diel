@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom"
 import Modal from "../Modals/Modal"
 import styles from "./TaskDetails.module.css"
-import TaskActions from "./TaskActions"
+import TaskActions from "./Actions/TaskActions"
 import Backdrop from "../Modals/Backdrop"
 import { TaskType } from "../../helpers/typeDefs"
 

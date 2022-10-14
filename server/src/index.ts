@@ -104,13 +104,26 @@ app.delete("/api/task",(req,res)=>{
   }
 })
 
-app.get("/api/tasks",(req,res)=>{
-  const orderedTasks = TASK_LIST.sort((a,b)=>{
-    if(a.date > b.date || (a.date === b.date && a.startTime > b.startTime)){ return 1 }
-    else{ return -1}
-  })
-  
-  res.json(orderedTasks)
+app.post("/api/tasks",(req,res)=>{
+  const {targetDate} = req.body
+  if(!targetDate){
+    res.sendStatus(400)
+  } else {
+    const orderedTasks = TASK_LIST.sort((a,b)=>{
+      if(a.date > b.date || (a.date === b.date && a.startTime > b.startTime)){ return 1 }
+      else{ return -1}
+    })
+
+    const responseTasks = orderedTasks.filter(task=>{
+      if(Array.isArray(targetDate)){
+        return task.date >= targetDate[0] && task.date <= targetDate[1]
+      } else {
+        return task.date === targetDate
+      }
+    })
+    
+    res.json(responseTasks)
+  }
 })
 
 app.listen(PORT,()=>{
