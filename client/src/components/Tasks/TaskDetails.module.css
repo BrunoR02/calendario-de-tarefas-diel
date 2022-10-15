@@ -9,6 +9,7 @@
 }
 
 .title{
+  width: 90%;
   font-size: 1.4em;
   font-weight: 600;
 }
@@ -46,4 +47,35 @@
 
 .description{
   padding: 20px 10px;
+}
+
+.tags{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.tagsTitle{
+  font-size: 1em;
+}
+
+.tagItem{
+  position: relative;
+  padding: 10px 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  background-color: #222;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.tagItem:hover{
+  background-color: #333;
 }

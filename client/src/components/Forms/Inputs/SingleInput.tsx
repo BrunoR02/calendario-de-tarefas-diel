@@ -15,8 +15,8 @@ export default function SingleInput({title,type,value,extraStyle,error,onChange,
 
   return (
     <div className={styles.formControl} style={extraStyle}>
-      <label className={styles.label + " " + (error && styles.errorLabel)} htmlFor="title">{title}</label>
-      {type !== "textarea" && <input required className={styles.input + " " + (error && styles.errorInput)} type={type} name="title" value={value} onBlur={onBlur} onChange={onChange}/>}
+      <label className={styles.label + " " + (error && styles.errorLabel)} htmlFor={title}>{title}</label>
+      {type !== "textarea" && <input required className={styles.input + " " + (error && styles.errorInput)} type={type} name={title} value={value} onBlur={onBlur} onChange={onChange}/>}
       {type === "textarea" && <textarea className={styles.textarea} value={value} onChange={onChange}/>}
     </div>
   )

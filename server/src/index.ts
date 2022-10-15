@@ -18,6 +18,7 @@ type TaskType = {
   endTime: string
   date: string
   holiday: string | null
+  tags: string[]
 }
 
 let TASK_LIST:TaskType[] = [
@@ -28,7 +29,8 @@ let TASK_LIST:TaskType[] = [
     startTime: "08:30",
     endTime: "09:30",
     date: "10/10/2022",
-    holiday: null
+    holiday: null,
+    tags: []
   },
   {
     id: "133",
@@ -37,7 +39,8 @@ let TASK_LIST:TaskType[] = [
     startTime: "12:00",
     endTime: "13:30",
     date: "13/10/2022",
-    holiday: null
+    holiday: null,
+    tags: []
   },
   {
     id: "1113",
@@ -46,7 +49,8 @@ let TASK_LIST:TaskType[] = [
     startTime: "10:00",
     endTime: "12:30",
     date: "13/10/2022",
-    holiday: null
+    holiday: null,
+    tags: []
   },
   {
     id: "12113",
@@ -55,7 +59,8 @@ let TASK_LIST:TaskType[] = [
     startTime: "15:00",
     endTime: "15:30",
     date: "13/10/2022",
-    holiday: null
+    holiday: null,
+    tags: []
   },
   {
     id: "11131",
@@ -64,7 +69,8 @@ let TASK_LIST:TaskType[] = [
     startTime: "13:00",
     endTime: "14:30",
     date: "11/10/2022",
-    holiday: null
+    holiday: null,
+    tags: []
   }
 ]
 

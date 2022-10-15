@@ -36,6 +36,27 @@
   color: #222;
 }
 
+.tags{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.tagItem{
+  position: relative;
+  padding: 10px 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: #fff;
+  background-color: #222;
+  border-radius: 20px;
+  overflow: hidden;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
 .holiday{
   font-weight: 600;
   color: rgb(30, 123, 61)

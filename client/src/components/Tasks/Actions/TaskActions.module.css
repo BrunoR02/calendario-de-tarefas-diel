@@ -10,6 +10,7 @@
   background-color: transparent;
   border-radius: 50%;
   border: none;
+  outline: none;
   box-shadow: 0 0 5px #222;
   cursor: pointer;
   overflow: hidden;

@@ -6,4 +6,5 @@ export type TaskType = {
   endTime: string
   description: string
   holiday: string | null
+  tags: string[]
 }
