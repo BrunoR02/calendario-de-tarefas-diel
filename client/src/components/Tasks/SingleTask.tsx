@@ -20,6 +20,7 @@ export default function SingleTask({task}:PropsType){
             <span className={styles.date}>{task.date}</span>
             <span className={styles.duration}>{task.startTime + " - " + task.endTime}</span>
           </div>
+          {task.holiday && <span className={styles.holiday}>Feriado: {task.holiday}</span>}
         </section>
       </div>
     </>

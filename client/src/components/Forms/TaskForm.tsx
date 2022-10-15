@@ -57,8 +57,9 @@ export default function TaskForm({closeModal,defaultData}:PropsType){
   async function submitHandler(e:FormEvent){
     e.preventDefault()
     if(!isTimeInvalid){
+      //Se tem dados já carregados nos inputs, ou seja se o usuário está editando.
       if(defaultData){
-        const body = {id:defaultData.id,...input,date:convertDate(input.date,"readable")}
+        const body = {id:defaultData.id,...input,date:convertDate(input.date,"readable"),holiday: null}
 
         const response = await fetch("/api/task",{
           method: "PUT",
@@ -74,7 +75,7 @@ export default function TaskForm({closeModal,defaultData}:PropsType){
       } else{
         const id = crypto.randomUUID().slice(0,8)
   
-        const body = {id,...input, date: convertDate(input.date,"readable")}
+        const body = {id,...input, date: convertDate(input.date,"readable"),holiday: null}
   
         const response = await fetch("/api/task",{
           method: "POST",

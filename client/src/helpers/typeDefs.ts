@@ -5,4 +5,5 @@ export type TaskType = {
   startTime: string
   endTime: string
   description: string
+  holiday: string | null
 }
