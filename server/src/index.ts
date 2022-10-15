@@ -2,6 +2,7 @@ import express from "express"
 import cors from "cors"
 import fetch from "node-fetch"
 import capitalizeFirstLetters from "./helpers/capitalizeFirstLetters"
+import isDateBetweenPeriod from "./helpers/isDateBetweenPeriod"
 const app = express()
 
 app.use(cors())
@@ -153,7 +154,7 @@ app.post("/api/tasks",(req,res)=>{
 
     const responseTasks = searchedTasks.filter(task=>{
       if(Array.isArray(targetDate)){
-        return task.date >= targetDate[0] && task.date <= targetDate[1]
+        return isDateBetweenPeriod(targetDate as [string,string],task.date)
       } else {
         return task.date === targetDate
       }
