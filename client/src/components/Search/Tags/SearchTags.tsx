@@ -46,8 +46,6 @@ export default function SearchTags({setTargetSearch}:PropsType){
     }))
   },[inputValue,tagList])
 
-  console.log(searchTagList)
-
   return (
     <div className={styles.container}>
       <button className={styles.button} onClick={()=>setShowOptions(true)}>Tags</button>
