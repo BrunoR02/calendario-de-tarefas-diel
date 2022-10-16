@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useReducer, useState} from "react"
+import capitalizeFirstLetters from "../../helpers/capitalizeFirstLetters"
 import convertDate from "../../helpers/convertDate"
 import { TaskType } from "../../helpers/typeDefs"
 import SingleInput from "./Inputs/SingleInput"
@@ -65,7 +66,13 @@ export default function TaskForm({closeModal,defaultData}:PropsType){
     if(!isTimeInvalid && !tagsHasError){
       //Se tem dados já carregados nos inputs, ou seja se o usuário está editando.
       if(defaultData){
-        const body = {id:defaultData.id,...input,date:convertDate(input.date,"readable"),holiday: null}
+        const body = {
+          id:defaultData.id,
+          ...input,
+          date:convertDate(input.date,"readable"),
+          tags: input.tags.map(tag=>capitalizeFirstLetters(tag)),
+          holiday: null
+        }
 
         const response = await fetch("/api/task",{
           method: "PUT",
@@ -81,7 +88,13 @@ export default function TaskForm({closeModal,defaultData}:PropsType){
       } else{
         const id = crypto.randomUUID().slice(0,8)
   
-        const body = {id,...input, date: convertDate(input.date,"readable"),holiday: null}
+        const body = {
+          id,
+          ...input,
+          date: convertDate(input.date,"readable"),
+          tags: input.tags.map(tag=>capitalizeFirstLetters(tag)),
+          holiday: null
+        }
   
         const response = await fetch("/api/task",{
           method: "POST",

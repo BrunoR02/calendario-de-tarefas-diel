@@ -3,11 +3,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 50%;
   margin: 20px;
 }
 
 .input{
-  width: 50%;
+  width: 80%;
   padding: 10px;
   font-size: 1em;
   color: #222;
@@ -19,7 +20,7 @@
 .button{
   position: absolute;
   top: 50%;
-  right: 26%;
+  right: 12%;
   transform: translateY(-45%);
   background-color: transparent;
   border: none;

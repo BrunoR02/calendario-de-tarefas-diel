@@ -1,0 +1,88 @@
+.container{
+  position: relative;
+}
+
+.modal{
+  position: fixed;
+  top: 60px;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  width: 300px;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #222;
+  background-color: #fff;
+  z-index: 6;
+  animation: in 0.3s ease-out 1 forwards;
+}
+
+.close{
+  align-self: flex-start;
+  width: 15px;
+  margin-bottom: 5px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.button,.searchButton{
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: #eee;
+  background-color: #222;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button::before,.searchButton::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0;
+  height: 100%;
+  background-color: #333;
+  border-radius: 10px;
+  transition: 0.3s ease;
+  z-index: -1;
+}
+
+.button:hover::before,.searchButton:hover::before{
+  width: 100%;
+}
+
+.button::after{
+  content: "";
+  display: table;
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
+  background-image: url("../../../assets/icons/dropdown.png");
+  background-size: cover;
+  filter: invert(90%);
+}
+
+.searchButton{
+  align-self: flex-end;
+  margin-top: 10px; 
+  font-size: 0.8em;
+  border: none;
+}
+
+@keyframes in{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}

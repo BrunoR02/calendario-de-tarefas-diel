@@ -1,6 +1,7 @@
 import { useState,useCallback } from "react"
 import TaskCalendar from "../components/Calendar/TaskCalendar"
 import SearchTitle from "../components/Search/SearchTitle"
+import SearchTags from "../components/Search/Tags/SearchTags"
 import AddTask from "../components/Tasks/Actions/AddTask"
 import TaskList from "../components/Tasks/TaskList"
 
@@ -8,14 +9,18 @@ import styles from "./HomePage.module.css"
 
 export default function HomePage(){ 
   const [targetDate,setTargetDate] = useState<string | [string,string]>(new Date().toLocaleString().slice(0,10))
-  const [targetSearch,setTargetSearch] = useState("")
+  const [targetSearchTitle,setTargetSearchTitle] = useState("")
+  const [targetSearchTags,setTargetSearchTags] = useState<string[]>([])
 
   return (
     <div className={styles.container}>
       <section className={styles.main}>
-        <SearchTitle setTargetSearch={(value:string)=>setTargetSearch(value)}/>
+        <div className={styles.filters}>
+          <SearchTitle setTargetSearch={(value:string)=>setTargetSearchTitle(value)}/>
+          <SearchTags setTargetSearch={(tags:string[])=>setTargetSearchTags(tags)}/>
+        </div>
         <AddTask/>
-        <TaskList targetDate={targetDate} targetSearch={targetSearch}/>
+        <TaskList targetDate={targetDate} targetSearchTags={targetSearchTags} targetSearchTitle={targetSearchTitle}/>
       </section>
       <section className={styles.sidebar}>
         <TaskCalendar setTargetDate={useCallback((date:Date | [Date,Date])=>{

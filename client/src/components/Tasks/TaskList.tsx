@@ -6,10 +6,11 @@ import styles from "./TaskList.module.css"
 
 type PropsType = {
   targetDate: string | [string,string]
-  targetSearch: string
+  targetSearchTitle: string
+  targetSearchTags: string[]
 }
 
-export default function TaskList({targetDate,targetSearch}:PropsType){
+export default function TaskList({targetDate,targetSearchTitle,targetSearchTags}:PropsType){
   const [tasks,setTasks] = useState<TaskType[]>([])
   const [isLoading,setIsLoading] = useState(false)
 
@@ -17,7 +18,7 @@ export default function TaskList({targetDate,targetSearch}:PropsType){
     setIsLoading(true)
     const response = await fetch("/api/tasks",{
       method: "POST",
-      body: JSON.stringify({targetDate,targetSearch}),
+      body: JSON.stringify({targetDate,targetSearchTitle,targetSearchTags}),
       headers: {
         "Content-Type": "application/json"
       }
@@ -25,7 +26,7 @@ export default function TaskList({targetDate,targetSearch}:PropsType){
     const data = await response.json()
     setTasks(data)
     setIsLoading(false)
-  },[targetDate,targetSearch])
+  },[targetDate,targetSearchTitle,targetSearchTags])
 
   useEffect(()=>{
     fetchData()

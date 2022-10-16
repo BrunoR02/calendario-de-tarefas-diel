@@ -74,15 +74,16 @@ let TASK_LIST:TaskType[] = [
   }
 ]
 
+let TAG_LIST:string[] = []
+
 app.get("/api",(req,res)=>{
   res.send("Funcionando")
 })
 
 app.post("/api/task",async (req,res)=>{
   const task:TaskType = req.body
-  if(!task){
-    res.sendStatus(400)
-  } else {
+  if(!task) res.sendStatus(400)
+  else {
     const response = await fetch("https://date.nager.at/api/v3/publicholidays/2022/BR")
     const holidays:any = await response.json()
     
@@ -91,7 +92,7 @@ app.post("/api/task",async (req,res)=>{
       const [year,month,day] = [dateArray[0],dateArray[1],dateArray[2]]
       const formatedDate = day + "/" + month + "/" + year
       if(task.date === formatedDate) task.holiday = item.localName
-    })
+  })
 
     TASK_LIST.push(task)
     res.sendStatus(201)
@@ -100,9 +101,8 @@ app.post("/api/task",async (req,res)=>{
 
 app.put("/api/task",async (req,res)=>{
   const task:TaskType = req.body
-  if(!task){
-    res.sendStatus(400)
-  } else {
+  if(!task) res.sendStatus(400)
+  else {
     const response = await fetch("https://date.nager.at/api/v3/publicholidays/2022/BR")
     const holidays:any = await response.json()
     
@@ -114,9 +114,7 @@ app.put("/api/task",async (req,res)=>{
     })
 
     const list = TASK_LIST.map(item=>{
-      if(item.id === task.id){
-        return task
-      }
+      if(item.id === task.id)return task
       return item
     })
 
@@ -128,9 +126,8 @@ app.put("/api/task",async (req,res)=>{
 
 app.delete("/api/task",(req,res)=>{
   const task = req.body
-  if(!task){
-    res.sendStatus(400)
-  } else {
+  if(!task) res.sendStatus(400)
+  else {
     const list = TASK_LIST.filter(item=>item.id!==task.id)
   
     TASK_LIST = list
@@ -140,34 +137,57 @@ app.delete("/api/task",(req,res)=>{
 })
 
 app.post("/api/tasks",(req,res)=>{
-  const {targetDate,targetSearch} = req.body
-  if(!targetDate && !targetSearch){
-    res.sendStatus(400)
-  } else {
+  const {targetDate,targetSearchTitle,targetSearchTags} = req.body
+  if(!targetDate && !targetSearchTitle && !targetSearchTags) res.sendStatus(400)
+  else {
     const orderedTasks = TASK_LIST.sort((a,b)=>{
-      if(a.date > b.date || (a.date === b.date && a.startTime > b.startTime)){ return 1 }
-      else{ return -1}
+      if(a.date > b.date || (a.date === b.date && a.startTime > b.startTime)) return 1 
+      else return -1
     })
 
-    let searchedTasks = orderedTasks
-    if(targetSearch !== ""){
-      searchedTasks = orderedTasks.filter(task=>{
-        return task.title.includes(capitalizeFirstLetters(targetSearch))  || 
-        task.title.toLowerCase().includes(targetSearch) || 
-        capitalizeFirstLetters(task.title).includes(capitalizeFirstLetters(targetSearch))
+    //Search by title
+    let searchedTitleTasks = orderedTasks
+    if(targetSearchTitle !== ""){
+      searchedTitleTasks = orderedTasks.filter(task=>{
+        return task.title.includes(capitalizeFirstLetters(targetSearchTitle))  || 
+        task.title.toLowerCase().includes(targetSearchTitle) || 
+        capitalizeFirstLetters(task.title).includes(capitalizeFirstLetters(targetSearchTitle))
       })
     }
 
-    const responseTasks = searchedTasks.filter(task=>{
-      if(Array.isArray(targetDate)){
-        return isDateBetweenPeriod(targetDate as [string,string],task.date)
-      } else {
-        return task.date === targetDate
-      }
+    //Search by tags
+    let searchedTagsTasks = searchedTitleTasks
+    if(targetSearchTags.length !== 0){
+      searchedTagsTasks = searchedTitleTasks.filter(task=>{
+        return task.tags.some(tag=>targetSearchTags.some((searchTag:string)=>searchTag===tag))
+      })
+    }
+
+    const responseTasks = searchedTagsTasks.filter(task=>{
+      if(Array.isArray(targetDate))return isDateBetweenPeriod(targetDate as [string,string],task.date)
+      else return task.date === targetDate
     })
     
     res.json(responseTasks)
   }
+})
+
+app.get("/api/tags",(req,res)=>{
+  const list:string[] = []
+ 
+  TASK_LIST.forEach(task=>{
+    task.tags.forEach(tag=>{
+      if(TAG_LIST.length === 0){
+        TAG_LIST.push(tag)
+        list.push(tag)
+      }
+      if(!list.some(tagItem=>tagItem===tag)) list.push(tag)
+    })
+  })
+
+  TAG_LIST = list
+
+  res.json({tags:list})
 })
 
 app.listen(PORT,()=>{
