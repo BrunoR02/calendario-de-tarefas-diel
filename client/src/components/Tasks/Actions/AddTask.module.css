@@ -7,12 +7,16 @@
   margin: 20px auto 0 auto;
 }
 
+.modal{
+  width: 30% !important;
+}
+
 .button{
   position: relative;
   display: flex;
   align-items: center;
   padding: 20px;
-  font-size: 1.1em;
+  font-size: 1em;
   font-weight: 600;
   color: #eee;
   background-color: #222;
@@ -50,4 +54,22 @@
   margin: 20px auto;
   font-size: 1.2em;
   text-align: center;
+}
+
+@media (max-width: 1200px){
+  .modal{
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 850px){
+  .modal{
+    width: 60% !important;
+  }
+}
+
+@media (max-width: 600px){
+  .modal{
+    width: 80% !important;
+  }
 }

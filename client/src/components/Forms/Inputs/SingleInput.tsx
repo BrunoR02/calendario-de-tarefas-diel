@@ -5,16 +5,16 @@ type PropsType = {
   title: string
   type: string
   value: string
-  extraStyle?: React.CSSProperties
+  extraClass?: string
   error?: boolean
   onChange: (e:ChangeEvent<HTMLInputElement & HTMLTextAreaElement>)=>void
   onBlur?: ()=>void
 }
 
-export default function SingleInput({title,type,value,extraStyle,error,onChange,onBlur}:PropsType){
+export default function SingleInput({title,type,value,error,extraClass,onChange,onBlur}:PropsType){
 
   return (
-    <div className={styles.formControl} style={extraStyle}>
+    <div className={styles.formControl + " " + extraClass}>
       <label className={styles.label + " " + (error && styles.errorLabel)} htmlFor={title}>{title} {(type === "textarea") && "(max: 300 caracteres)"}</label>
       {type !== "textarea" && <input required className={styles.input + " " + (error && styles.errorInput)} type={type} name={title} value={value} onBlur={onBlur} onChange={onChange}/>}
       {type === "textarea" && <textarea className={styles.textarea} value={value} onChange={onChange} maxLength={300}/>}

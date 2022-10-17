@@ -1,5 +1,5 @@
 .select{
-  margin: 20px 0;
+  margin-bottom: 20px;
   padding: 10px;
   font-size: 1em;
   font-weight: 600;
@@ -7,4 +7,16 @@
   background-color: #222;
   border: 1px solid #222;
   border-radius: 10px;
+}
+
+@media (max-width: 850px){
+  .calendar{
+    width: 50%;
+  }
+}
+
+@media(max-width: 500px){
+  .calendar{
+    width: 80%;
+  }
 }

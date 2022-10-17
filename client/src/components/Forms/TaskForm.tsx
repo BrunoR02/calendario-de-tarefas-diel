@@ -114,12 +114,12 @@ export default function TaskForm({closeModal,defaultData}:PropsType){
 
   return (
     <form className={styles.form} onSubmit={submitHandler}>
-      <SingleInput title="Título" type="text" value={input.title} extraStyle={{width:"80%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"title",payload:e.target.value})}}/>
-      <SingleInput title="Descrição" type="textarea" value={input.description} extraStyle={{width:"80%"}} onChange={(e:ChangeEvent<HTMLTextAreaElement>)=>{dispatch({type:"description",payload:e.target.value})}}/>
-      <SingleInput title="Data" type="date" value={input.date} extraStyle={{width:"30%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"date",payload:e.target.value})}}/>
+      <SingleInput title="Título" type="text" value={input.title} extraClass={styles.inputMain} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"title",payload:e.target.value})}}/>
+      <SingleInput title="Descrição" type="textarea" value={input.description} extraClass={styles.inputMain} onChange={(e:ChangeEvent<HTMLTextAreaElement>)=>{dispatch({type:"description",payload:e.target.value})}}/>
+      <SingleInput title="Data" type="date" value={input.date} extraClass={styles.inputDate} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"date",payload:e.target.value})}}/>
       <div style={{display:"flex",justifyContent:"center",flexWrap: "wrap",width:"100%"}}>
-        <SingleInput title="De" type="time" value={input.startTime} error={isTimeInvalid && isDurationDefined} extraStyle={{width:"25%"}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"startTime",payload:e.target.value})}}/>
-        <SingleInput title="Até" type="time" value={input.endTime} error={isTimeInvalid && isDurationDefined} extraStyle={{width:"25%"}} onBlur={()=>{setIsDurationDefined(true)}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"endTime",payload:e.target.value})}}/>
+        <SingleInput title="De" type="time" value={input.startTime} error={isTimeInvalid && isDurationDefined} extraClass={styles.inputTime} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"startTime",payload:e.target.value})}}/>
+        <SingleInput title="Até" type="time" value={input.endTime} error={isTimeInvalid && isDurationDefined} extraClass={styles.inputTime} onBlur={()=>{setIsDurationDefined(true)}} onChange={(e:ChangeEvent<HTMLInputElement>)=>{dispatch({type:"endTime",payload:e.target.value})}}/>
       </div>
       {isTimeInvalid && isDurationDefined && <span className={styles.errorMessage}>Duração Inválida.</span>}
       <TagInput tagsHasError={tagsHasError} setTagsHasError={(error:boolean)=>setTagsHasError(error)} initialTags={input.tags} updateTags={(tags)=>{dispatch({type:"tags",payload:tags})}}/>

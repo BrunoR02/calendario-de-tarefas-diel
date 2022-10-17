@@ -14,7 +14,7 @@ export default function AddTask(){
     <>
       {showModal && ReactDOM.createPortal(<>
         <Backdrop closeModal={()=>setShowModal(false)}/>
-        <Modal closeModal={()=>setShowModal(false)} extraStyle={{width: "30%"}}>
+        <Modal closeModal={()=>setShowModal(false)} extraClass={styles.modal}>
           <h3 className={styles.title}>Adicionar uma tarefa</h3>
           <TaskForm closeModal={()=>setShowModal(false)}/>
         </Modal>

@@ -66,7 +66,7 @@ export default function TaskCalendar({setTargetDate}:PropsType){
         <option value="week">Semana</option>
         <option value="month">Mês</option>
       </select>
-      <Calendar locale="pt-BR" onChange={setDate} value={date}/>
+      <Calendar className={styles.calendar} locale="pt-BR" onChange={setDate} value={date}/>
     </>
   )
 }

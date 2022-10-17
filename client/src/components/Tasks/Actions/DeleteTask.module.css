@@ -1,3 +1,8 @@
+.modal{
+  width: 30%; 
+  z-index: 8;
+}
+
 .button{
   position: relative;
   margin: 0 10px;
@@ -75,4 +80,22 @@
 
 .actionButton:hover::before{
   width: 100%;
+}
+
+@media (max-width: 1200px){
+  .modal{
+    width: 50%;
+  }
+}
+
+@media (max-width: 850px){
+  .modal{
+    width: 60%;
+  }
+}
+
+@media (max-width: 600px){
+  .modal{
+    width: 80%;
+  }
 }

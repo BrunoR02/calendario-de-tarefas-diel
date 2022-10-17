@@ -53,3 +53,21 @@
   color: red;
   font-size: 0.8em;
 }
+
+.inputMain{
+  width: 80%;
+}
+
+.inputDate{
+  width: 40%;
+}
+
+.inputTime{
+  width: 25%;
+}
+
+@media (max-width: 450px){
+  .inputTime{
+    width: 30%;
+  }
+}

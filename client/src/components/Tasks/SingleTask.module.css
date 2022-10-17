@@ -19,6 +19,7 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 
 .details{
@@ -41,7 +42,6 @@
   justify-content: flex-start;
   align-items: flex-end;
   gap: 5px;
-  margin-top: 10px;
 }
 
 .tagItem{
@@ -60,4 +60,10 @@
 .holiday{
   font-weight: 600;
   color: rgb(30, 123, 61)
+}
+
+@media (max-width: 500px){
+  .holiday{
+    margin-top: 5px;
+  }
 }

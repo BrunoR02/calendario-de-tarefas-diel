@@ -19,7 +19,7 @@ export default function EditTaskAction({task}:PropsType){
     <>
       {showModal && ReactDOM.createPortal(<>
         <Backdrop closeModal={()=>setShowModal(false)} extraStyle={{zIndex:7}}/>
-        <Modal closeModal={()=>setShowModal(false)} extraStyle={{width: "30%",zIndex:8}}>
+        <Modal closeModal={()=>setShowModal(false)} extraClass={styles.modal}>
           <h3 className={styles.title}>Editar tarefa</h3>
           <TaskForm closeModal={()=>setShowModal(false)} defaultData={task}/>
         </Modal>

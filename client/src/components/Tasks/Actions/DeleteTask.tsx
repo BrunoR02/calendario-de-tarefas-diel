@@ -31,7 +31,7 @@ export default function DeleteTask({taskId}:PropsType){
     <>
       {showModal && ReactDOM.createPortal(<>
         <Backdrop closeModal={()=>setShowModal(false)} extraStyle={{zIndex:7}}/>
-        <Modal closeModal={()=>setShowModal(false)} extraStyle={{width: "30%", zIndex:8}}>
+        <Modal closeModal={()=>setShowModal(false)} extraClass={styles.modal}>
           <h3 className={styles.title}>Você tem certeza que quer apagar essa tarefa?</h3>
           <div className={styles.actions}>
             <button className={styles.actionButton} onClick={()=>setShowModal(false)}>Não</button>

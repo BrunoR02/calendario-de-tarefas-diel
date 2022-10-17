@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 40%;
   margin: 20px 0;
 }
 
@@ -26,4 +26,10 @@
   border: none;
   cursor: pointer;
   outline: none;
+}
+
+@media (max-width: 850px){
+  .form{
+    width: 60%;
+  }
 }

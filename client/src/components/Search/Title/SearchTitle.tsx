@@ -1,7 +1,7 @@
 import {ChangeEvent, FormEvent, useState} from "react"
 
 import styles from "./SearchTitle.module.css"
-import searchIcon from "../../assets/icons/search.png"
+import searchIcon from "../../../assets/icons/search.png"
 
 type PropsType = {
   setTargetSearch: (value:string)=>void

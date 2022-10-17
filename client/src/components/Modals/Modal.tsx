@@ -4,15 +4,15 @@ import closeIcon from "../../assets/icons/close.png"
 
 type PropsType = {
   children: React.ReactNode
-  extraStyle?: React.CSSProperties
+  extraClass?: string
   closeModal: () => void
 }
 
-export default function Modal({children,extraStyle,closeModal}:PropsType){
+export default function Modal({children,extraClass,closeModal}:PropsType){
   
   return (
-    <div className={styles.modal} style={extraStyle}>
-      <button className={styles.close} onClick={closeModal}><img src={closeIcon} alt="Close" width="25px"/></button> 
+    <div className={styles.modal + " " + extraClass}>
+      <button className={styles.close} onClick={closeModal}><img src={closeIcon} alt="Close" width="20px"/></button> 
       {children}
     </div>
   )
